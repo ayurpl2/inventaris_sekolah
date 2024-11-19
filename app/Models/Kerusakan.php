@@ -15,12 +15,17 @@ class Kerusakan extends Model
         'user_id',
         'barang_id',
         'tgl_pengecekan',
+        'pengecek_id',
         'deskripsi',
         'setatus'
     ];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function pengecek()
+    {
+        return $this->belongsTo(User::class, 'pengecek_id');
     }
     public function barang()
     {

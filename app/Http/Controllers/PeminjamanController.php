@@ -57,35 +57,40 @@ class PeminjamanController extends Controller
 
     // Mengupdate data peminjaman yang sudah ada
     public function updatePeminjaman(Request $request, $id)
-    {
-        
-        $request->validate([
-            'nama_peminjam' => 'required|string|max:255',
-            'barang' => 'required|string|max:255',
-            'tanggal_pinjam' => 'required|date',
-            'tanggal_kembali' => 'required|date',
-            'jumlah_pinjaman' => 'required|integer',
-        ], [
-            'nama_peminjam.required' => 'Nama peminjam wajib diisi.',
-            'barang.required'           => 'Barang wajib diisi.',
-            'tanggal_pinjam.required' => 'Tanggal pinjam wajib diisi.',
-            'tanggal_kembali.required' => 'Tanggal kembali wajib diisi.',
-            'jumlah_pinjaman.required' => 'Jumlah pinjaman wajib diisi.',
-            'jumlah_pinjaman.integer' => 'Jumlah pinjaman harus berupa angka.'
-        ]);
-        
-        // Temukan dan update data peminjaman
-        $peminjam = Peminjam::findOrFail($id);
-        $peminjam->update([
-            'nama_peminjam' => $request->nama_peminjam,
-            'barang' => $request->barang, // Ubah dari judul_buku ke barang
-            'tanggal_pinjam' => $request->tanggal_pinjam,
-            'tanggal_kembali' => $request->tanggal_kembali,
-            'jumlah_pinjaman' => $request->jumlah_pinjaman,
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'user_id' => 'required|integer', // ID pengguna harus berupa integer
+        'barang_id' => 'required|integer', // ID barang harus berupa integer
+        'tgl_peminjam' => 'required|date', // Format tanggal
+        'tgl_pengembalian' => 'required|date|after_or_equal:tgl_peminjam', // Tanggal pengembalian minimal sama atau setelah tanggal peminjaman
+        'jml_pinjaman' => 'required|integer', // Jumlah pinjaman minimal 1
+    ], [
+        // Pesan error kustom (opsional)
+        'user_id.required' => 'ID pengguna diperlukan.',
+        'barang_id.required' => 'ID barang diperlukan.',
+        'tgl_peminjam.required' => 'Tanggal peminjaman diperlukan.',
+        'tgl_pengembalian.required' => 'Tanggal pengembalian diperlukan.',
+        'tgl_pengembalian.after_or_equal' => 'Tanggal pengembalian harus setelah atau sama dengan tanggal peminjaman.',
+        'jml_pinjaman.required' => 'Jumlah pinjaman diperlukan.',
+    ]);
 
-        return redirect('/datapeminjam')->with('berhasil', 'Data peminjaman berhasil diupdate');
-    }
+    // Temukan data peminjaman berdasarkan ID
+    $peminjam = Peminjam::findOrFail($id);
+
+    // Update data peminjaman
+    $peminjam->update([
+        'user_id' => $request->user_id, // ID pengguna dari input form
+        'barang_id' => $request->barang_id, // ID barang dari input form
+        'tgl_peminjam' => $request->tgl_peminjam, // Tanggal peminjaman
+        'tgl_pengembalian' => $request->tgl_pengembalian, // Tanggal pengembalian
+        'jml_pinjaman' => $request->jml_pinjaman, // Jumlah pinjaman
+    ]);
+
+    // Redirect dengan pesan sukses
+    return redirect('/datapeminjam')->with('berhasil', 'Data peminjaman berhasil diupdate');
+}
+
 
     // Menghapus data peminjaman
     public function destroy($id)

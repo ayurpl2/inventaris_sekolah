@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('barang_id');
             $table->date('tgl_pengecekan');
+            $table->unsignedBigInteger('pengecek_id');
             $table->text('deskripsi');
             $table->string('setatus');
             $table->timestamps();

@@ -12,6 +12,18 @@
 
 </head>
 
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <body class="h-100">
     <div class="authincation h-100">
         <div class="container-fluid h-100">
@@ -26,24 +38,30 @@
                                         @csrf
                                         <div class="form-group">
                                             <label><strong>Nama</strong></label>
-                                            <input name="nama" type="text" class="form-control" placeholder="nama">
+                                            <input name="nama" type="text" class="form-control" placeholder="Nama">
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
-                                            <input name="email" type="email" class="form-control" placeholder="masukan email">
+                                            <input name="email" type="email" class="form-control" placeholder="Masukan email">
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input name="password" type="password" class="form-control" value="password">
+                                            <input name="password" type="password" class="form-control" placeholder="Password">
                                         </div>
-                                 
-                    
+                                        <div class="form-group">
+                                            <label><strong>Role</strong></label>
+                                            <select name="role" class="form-control">
+                                                <option value="user" selected>User</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
+                                        </div>
                                         <div class="text-center mt-4">
-                                            <button type="submit" class="btn btn-primary btn-block" href="user">register</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Register</button>
                                         </div>
                                     </form>
+
                                     <div class="new-account mt-3">
-                                        
+
                                     </div>
                                 </div>
                             </div>

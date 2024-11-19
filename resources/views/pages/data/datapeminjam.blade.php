@@ -21,23 +21,23 @@
                             <th class="text-dark">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody> 
+                    <tbody>
                         @foreach($peminjamans as $key => $peminjaman)
                         <tr>
                             <td class="text-dark">{{ $key + 1 }}</td>
                             <td class="text-dark">{{ $peminjaman->user ? $peminjaman->user->nama : 'tidak ada' }}</td>
-                            <td class="text-dark">{{ $peminjaman->barang->barang_id}}</td>
+                            <td class="text-dark">{{ $peminjaman->barang->nama_barang}}</td>
                             <td class="text-dark">{{ $peminjaman->tgl_peminjam }}</td>
                             <td class="text-dark">{{ $peminjaman->tgl_pengembalian }}</td>
                             <td class="text-dark">{{ $peminjaman->jml_pinjaman }}</td>
                             <td>
                                 <a href="/editpinjamanan/{{$peminjaman->id}}"
                                     class="btn btn-warning text-white">Edit</a>
-                                   
+
                                     <a onClick="return confirm('apaka anda yakin ingin menghapus?')"
                                     href="/peminjaman/destroy/{{ $peminjaman->id }}"
                                      class="btn btn-danger text-black">Hapus</a>
-                                </form>    
+                                </form>
                         </tr>
                         @endforeach
                     </tbody>
