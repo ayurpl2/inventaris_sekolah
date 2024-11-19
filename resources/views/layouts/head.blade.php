@@ -9,3 +9,10 @@
 <link href="{{asset('assets/vendor/jqvmap/css/jqvmap.min.css')}}" rel="stylesheet">
 <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+    input.form-control,
+    select.form-control {
+        color: #333; /* Warna teks gelap */
+        background-color: #fff; /* Latar belakang putih */
+    }
+</style>

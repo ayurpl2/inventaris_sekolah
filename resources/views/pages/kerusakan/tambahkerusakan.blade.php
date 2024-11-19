@@ -8,43 +8,69 @@
     <div class="card-body">
         <form action="/store/kerusakan" method="POST">
             @csrf
+            <!-- Nama Pengecek -->
             <div class="form-group">
-                <label class="text-dark">Nama</label>
-                <select name="user_id" id="" class="from-control">
-                    <option value="" selected>Pilih user</option>
-                    @foreach ($users as $user)
-                        <option {{old('user_id') == $user->id ? 'selected' : ''}}
-                            value="{{ $user->id }}">
-                            {{ $user->nama}}</option>
-                    @endforeach
-                        </select>
-            </div>
-            <div class="form-group">
-                <label class="text-dark">Barang</label>
-                <select name="barang_id" id="" class="from-control">
-                    <option value="" selected>Pilih barang</option>
-                    @foreach ($barangs as $barang)
-                        <option {{old('barang_id') == $barang->id ? 'selected' : ''}}
-                            value="{{ $barang->id }}">
-                            {{ $barangs->barang}}</option>
-                    @endforeach
-                        </select>
-            </div>
-            <div class="form-group">
-                <label class="text-dark">Tanggal Pengecekan</label>
-                <input name="tgl_pengecekan" type="date" class="form-control" placeholder="Masukan Tanggal Pengecekan">
-            </div>
-            <div class="form-group">
-                <label class="text-dark">Deskripsi</label>
-                <input name="deskripsi" type="text" class="form-control" placeholder="Masukan Deskripsi">
-            </div>
-            <div class="form-group">
-                <label class="text-dark">Setatus</label>
-                <select name="setatus" class="form-control">
-                    <option value="baik">Baik</option>
-                    <option value="rusak">Rusak</option>
+                <label class="text-dark">Nama Pengecek</label>
+                <select name="user_id" class="form-control" readonly>
+                    <option value="{{ auth()->user()->id }}" selected>
+                        {{ auth()->user()->nama }}
+                    </option>
                 </select>
             </div>
+
+            <!-- Barang -->
+            <div class="form-group">
+                <label class="text-dark">Barang</label>
+                <select name="barang_id" class="form-control">
+                    <option value="" selected disabled>Pilih barang</option>
+                    @foreach($barangs as $barang)
+                        <option value="{{ $barang->id }}"
+                            {{ old('barang_id') == $barang->id ? 'selected' : '' }}>
+                            {{ $barang->nama }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('barang_id')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Tanggal Pengecekan -->
+            <div class="form-group">
+                <label class="text-dark">Tanggal Pengecekan</label>
+                <input name="tgl_pengecekan" type="date"
+                       class="form-control"
+                       value="{{ old('tgl_pengecekan') }}">
+                @error('tgl_pengecekan')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Deskripsi -->
+            <div class="form-group">
+                <label class="text-dark">Deskripsi</label>
+                <input name="deskripsi" type="text"
+                       class="form-control"
+                       placeholder="Masukan Deskripsi"
+                       value="{{ old('deskripsi') }}">
+                @error('deskripsi')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Status -->
+            <div class="form-group">
+                <label class="text-dark">Status</label>
+                <select name="setatus" class="form-control">
+                    <option value="baik" {{ old('setatus') == 'baik' ? 'selected' : '' }}>Baik</option>
+                    <option value="rusak" {{ old('setatus') == 'rusak' ? 'selected' : '' }}>Rusak</option>
+                </select>
+                @error('setatus')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Tombol Submit -->
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </form>
     </div>

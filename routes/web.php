@@ -16,12 +16,12 @@ use App\Http\Controllers\PeminjamanController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/  
+*/
 Route::middleware(['guest'])->group(function(){
     Route::get('/login', [AuthController::class,'login'])->name('login');
 
     Route::post('/store/login', [AuthController::class,'storelogin']);
-    
+
     Route::get('/register', [AuthController::class,'register'])->name('register');
     Route::post('/store/register', [AuthController::class,'storeregister']);
 });
@@ -29,6 +29,10 @@ Route::middleware(['guest'])->group(function(){
 
 Route::middleware(['auth'])->group(function() {
 
+
+    Route::get('/',function(){
+        return view('pages.dashboard.index');
+    });
 
     Route::get('/databarang',[BarangController::class,'index']);
     Route::get('/tambahbarang',[BarangController::class,'create']);
@@ -47,7 +51,7 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/edituser',function(){
         return view('pages.user.edituser');
-        
+
     });
 
     Route::get('/tambahuser',function(){
@@ -56,7 +60,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/editbarang',function(){
         return view('pages.barang.editbarang');
     });
-    
+
 
 
     Route::get('/datapeminjam', [PeminjamanController::class, 'index']);
@@ -73,7 +77,7 @@ Route::middleware(['auth'])->group(function() {
 
      // EDIT BARANG
          Route::get('/editbarang/{id}',[BarangController::class,'edit']);
-         Route::post('/updatebarang/{id}',[BarangController::class,'updatebarang']); 
+         Route::post('/updatebarang/{id}',[BarangController::class,'updatebarang']);
 
      // HAPUS PEMINJAMAN
         Route::get('/peminjaman/destroy/{id}',[PeminjamanController::class,'destroy']);
@@ -101,17 +105,13 @@ Route::middleware(['auth'])->group(function() {
 
      // HAPUS USER
         Route::get('/destroy/user/{id}',[UserController::class,'destroy']);
-    
+
      // EDIT PEMINJAMAN
         Route::get('/editpinjamanan/{id}',[PeminjamanController::class,'edit']);
-        Route::post('/updatePeminjaman/{id}',[PeminjamanController::class,'updatePeminjaman']);   
+        Route::post('/updatePeminjaman/{id}',[PeminjamanController::class,'updatePeminjaman']);
 });
 
 //Pages User/peminjam
-
-Route::get('/dashboard/user', function(){
-    return view('pagesUser.dasboardUser.index');
-});
 
 
 

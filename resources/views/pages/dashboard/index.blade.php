@@ -1,12 +1,11 @@
 @extends('layouts.app')
 @section('content')
-        
+
 
         <!--**********************************
             Content body start
         ***********************************-->
 
-            <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-sm-6">
                         <div class="card">
@@ -62,8 +61,6 @@
                         <!-- /# card -->
                     </div>
                     <!-- /# column -->
-                </div>
-                <div class="row">
                     <div class="col-xl-8 col-lg-8 col-md-8">
                         <div class="card">
                             <div class="card-header">
@@ -98,153 +95,7 @@
                         </div>
                     </div>
                 </div>
-               
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Project</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="current-progress">
-                                    <div class="progress-content py-2">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Website</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-                                                            40%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content py-2">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Android</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                                                            60%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content py-2">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Ios</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-70" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                                            70%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content py-2">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Mobile</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                                                            90%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                   
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="testimonial-widget-one p-17">
-                                    <div class="testimonial-widget-one owl-carousel owl-theme">
-                                        <div class="item">
-                                            <div class="testimonial-content">
-                                                <div class="testimonial-text">
-                                                    <i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                                                    consectetur adipisicing elit.
-                                                    <i class="fa fa-quote-right"></i>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <div class="testimonial-author">TYRION LANNISTER</div>
-                                                        <div class="testimonial-author-position">Founder-Ceo. Dell Corp
-                                                        </div>
-                                                    </div>
-                                                    <img class="testimonial-author-img ml-3" src="./images/avatar/1.png" alt="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="testimonial-content">
-                                                <div class="testimonial-text">
-                                                    <i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                                                    consectetur adipisicing elit.
-                                                    <i class="fa fa-quote-right"></i>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <div class="testimonial-author">TYRION LANNISTER</div>
-                                                        <div class="testimonial-author-position">Founder-Ceo. Dell Corp
-                                                        </div>
-                                                    </div>
-                                                    <img class="testimonial-author-img ml-3" src="./images/avatar/1.png" alt="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="testimonial-content">
-                                                <div class="testimonial-text">
-                                                    <i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                                                    consectetur adipisicing elit.
-                                                    <i class="fa fa-quote-right"></i>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <div class="testimonial-author">TYRION LANNISTER</div>
-                                                        <div class="testimonial-author-position">Founder-Ceo. Dell Corp
-                                                        </div>
-                                                    </div>
-                                                    <img class="testimonial-author-img ml-3" src="./images/avatar/1.png" alt="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Web Server</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="cpu-load-chart">
-                                    <div id="cpu-load" class="cpu-load"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /# card -->
-                    </div>
- 
+
+
+
+@endsection
