@@ -53,13 +53,13 @@ class BarangController extends Controller
 
         return redirect('/databarang');
     }
-    
+
     // DELETE BARANG
     public function destroy($id)
     {
-        $barangs = Barang::find($id);
-        
-        $barangs->delete();
+        $barang = Barang::find($id);
+
+        $barang->delete();
 
         return redirect('/databarang');
     }
@@ -67,7 +67,7 @@ class BarangController extends Controller
     public function edit($id)
     {
         $dataBarang = Barang::find($id);
-        return view('pages.Barang.editBarang',compact('dataBarang')); 
+        return view('pages.Barang.editBarang',compact('dataBarang'));
     }
 
     public function updatebarang(Request $request, $id) {
@@ -84,7 +84,7 @@ class BarangController extends Controller
             'stok_barang.required' => "Stok harus diisi",
             'harga.required' => "Harga harus diisi",
         ]);
-    
+
         $updateDatabarang = [
             'nama_barang' => $request->nama_barang,
             'lokasi' => $request->lokasi,
@@ -92,16 +92,16 @@ class BarangController extends Controller
             'stok_barang' => $request->stok_barang,
             'harga' => $request->harga,
         ];
-    
+
         $dataBarang = Barang::find($id);
         if ($dataBarang) {
             $dataBarang->update($updateDatabarang);
             return redirect('/databarang')->with('success', 'Data barang berhasil diperbarui');
         }
-    
+
         return redirect('/databarang')->with('error', 'Data barang tidak ditemukan');
     }
-    
+
 }
 
 

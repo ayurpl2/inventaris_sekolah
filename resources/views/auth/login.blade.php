@@ -27,10 +27,16 @@
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
                                             <input name="email" type="email" class="form-control" >
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
                                             <input name="password" type="password" class="form-control" >
+                                            @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Login</button>

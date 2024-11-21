@@ -56,6 +56,10 @@ public function storelogin(Request $request)
     $credentials = $request->validate([
         'email' => 'required|email',
         'password' => 'required'
+    ], [
+        'email.email' => 'isi harus berisi email',
+        'email.required' => 'harus mengisi data',
+        'password.required' => 'data tidak boleh kosong'
     ]);
 
     // Attempt to authenticate the user

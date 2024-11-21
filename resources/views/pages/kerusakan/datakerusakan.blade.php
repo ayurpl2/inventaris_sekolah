@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">
         <h4 class="card-title">Pengecekan List</h4>
-        <h5><a href="/tambahkerusakan" class="btn btn-info">tambah pengecekan</a></h5>
+        <h5><a href="/datapeminjam" class="btn btn-info">tambah pengecekan</a></h5>
     </div>
     <div class="card-body">
         <table class="table">
@@ -26,16 +26,19 @@
                 @foreach ($kerusakans as $no=> $item)
                     <tr>
                         <td>{{ $no + 1}}</td>
-                        <td>{{ $item->user->nama }}</td>
-                        <td>{{ $item->barang->nama_barang }}</td>
+                        <td>{{ $item->peminjam ? $item->peminjam->nama : "nama tidak ada" }}</td>
+                        <td>{{ $item->barang ? $item->barang->nama_barang : 'Barang tidak ditemukan' }}</td>
                         <td>{{ $item->tgl_pengecekan }}</td>
-                        <td>{{ $item->pengecek->nama}}</td>
+                        <td>{{ $item->pengecek ? $item->pengecek->nama : "tidak ada"}}</td>
                         <td>{{ $item->deskripsi }}</td>
                         <td>{{ $item->setatus }}</td>
 
 
                         <td>
-                            <a href="/editkerusakan/{{$item->id}}">edit</a>
+                            <a href="/editkerusakan/{{$item->id}} " class="btn btn-warning">edit</a>
+                                <a href="/destroy/kerusakan/{{ $item->id }}"
+                                    class="btn btn-danger btn-warning"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">Hapus</a>
                         </td>
                     </tr>
                 @endforeach
