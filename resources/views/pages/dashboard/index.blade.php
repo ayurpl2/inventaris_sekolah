@@ -33,9 +33,11 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-sm-6">
                         <div class="card">
                             <div class="stat-widget-two card-body">
+                                @if (Auth::user()->role == 'admin')
                                 <div class="stat-content">
                                     <div class="stat-text">data kerusakan</div>
                                     <div class="stat-digit"> <a href="/datakerusakan" class="text-dark">{{ $rusak}} kerusakan</a> </div>
@@ -43,12 +45,14 @@
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="card">
                             <div class="stat-widget-two card-body">
+                                @if (Auth::user()->role == 'admin')
                                 <div class="stat-content">
                                     <div class="stat-text">barang yang baik</div>
                                     <div class="stat-digit"><a href="/datakerusakan" class="text-dark">{{$baik}} barang aman</a> </div>
@@ -56,6 +60,7 @@
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-danger w-65" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <!-- /# card -->
@@ -80,7 +85,9 @@
                             <div class="card-body text-center">
                                 <div class="m-t-10">
                                     <h4 class="card-title">Total user</h4>
+                                    @if (Auth::user()->role == 'admin')
                                     <h2 class="mt-3"> <a href="/user" class="text-dark">{{$totaladmin}} User</a> </h2>
+                                    @endif
                                 </div>
                                 <div class="widget-card-circle mt-5 mb-5" id="info-circle-card">
                                     <i class="ti-control-shuffle pa"></i>
