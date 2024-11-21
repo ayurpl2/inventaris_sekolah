@@ -31,4 +31,9 @@ class Kerusakan extends Model
     {
         return $this->belongsTo(Barang::class, 'barang_id');
     }
+    public function peminjam()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+
 }

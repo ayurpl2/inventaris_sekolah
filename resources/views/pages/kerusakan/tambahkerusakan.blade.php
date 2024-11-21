@@ -10,13 +10,20 @@
             @csrf
             <!-- Nama Pengecek -->
             <div class="form-group">
-                <label class="text-dark">Nama Pengecek</label>
-                <select name="user_id" class="form-control" readonly>
-                    <option value="{{ auth()->user()->id }}" selected>
-                        {{ auth()->user()->nama }}
-                    </option>
+                <label class="text-dark">Nama peminjam</label>
+                <select name="user_id" class="form-control">
+                    <option value="" selected disabled>Pilih peminjam</option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                            {{ $user->nama }} ({{ $user->role }})
+                        </option>
+                    @endforeach
                 </select>
+                @error('user_id')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
+
 
             <!-- Barang -->
             <div class="form-group">

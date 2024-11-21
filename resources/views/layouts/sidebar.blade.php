@@ -16,7 +16,7 @@
                         <li><a href="/datapeminjam">Data peminjam</a></li>
                     </ul>
                 </li>
-                @if(Auth::user()->role == 'admin')
+                @if(Auth::user()->role )
 
                 <li class="nav-label">Components</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="bi bi-database-fill"></i></i><span class="nav-text">Data Barang</span></a>
@@ -39,6 +39,8 @@
 
                         </ul>
                     </li>
+                    @endif
+                    @if (Auth::user()->role == 'admin')
 
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="bi bi-check-circle-fill"></i><span class="nav-text">Pengecekan Kerusakan</span></a>
                         <ul aria-expanded="false">
@@ -83,7 +85,15 @@
                     @endif
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="bi bi-box-arrow-left"></i><span class="nav-text">Logout</span></a>
                     <ul aria-expanded="false">
-                        <li><a href="/logout">Logout</a></li>
+                    <li>
+                        <a href="/logout" onclick="return confirmLogout()">Logout</a>
+                    </li>
+                    <script>
+                        function confirmLogout() {
+                            return confirm("Apakah Anda yakin ingin keluar?");
+                        }
+                    </script>
+
                         {{-- <li><a href="./form-wizard.html">Wizard</a></li>
                         <li><a href="./form-editor-summernote.html">Summernote</a></li>
                         <li><a href="form-pickers.html">Pickers</a></li>

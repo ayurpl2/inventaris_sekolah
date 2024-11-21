@@ -1,48 +1,88 @@
 @extends('layouts.app')
-@section('content')
 
+@section('content')
 <div class="card">
     <div class="card-header">
         <h4 class="card-title">Edit Pengecekan</h4>
     </div>
     <div class="card-body">
         <div class="basic-form">
-            <form action="/updatekerusakan/{{ $datakerusakan->id }}" method="post">
+            <form action="/updatekerusakan/{{ $datakerusakan->id }}" method="POST">
                 @csrf
+
+                <!-- Nama Peminjam -->
                 <div class="form-group">
-                    <label>Nama</label>
-                    <input name="datauser" type="text" value="{{ $datakerusakan->nama }}" class="form-control" placeholder="Enter Name" required>
+                    <label class="text-dark">Nama Peminjam</label>
+                    <select name="user_id" class="form-control">
+                        <option value="" disabled selected>Pilih peminjam</option>
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}"
+                                {{ old('user_id', $datakerusakan->user_id) == $user->id ? 'selected' : '' }}>
+                                {{ $user->nama }} ({{ $user->role }})
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('user_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
+
+                <!-- Barang -->
                 <div class="form-group">
                     <label>Barang</label>
-                    <select name="barang" class="form-control" required>
-                        <option value="pensil" {{ $datakerusakan->barang == 'pensil' ? 'selected' : '' }}>Pensil</option>
-                        <option value="pulpen" {{ $datakerusakan->barang == 'pulpen' ? 'selected' : '' }}>Pulpen</option>
+                    <select name="barang_id" class="form-control">
+                        <option value="" disabled selected>Pilih Barang</option>
+                        @foreach($barangs as $barang)
+                            <option value="{{ $barang->id }}" {{ $barang->id == $barang->barang_id ? 'selected' : '' }}>
+                                {{ $barang->nama }}
+                            </option>
+                        @endforeach
                     </select>
+                    @error('barang_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
+
+
+                <!-- Tanggal Pengecekan -->
                 <div class="form-group">
-                    <label>Tanggal Pengecekan</label>
-                    <input name="tanggalpengecekan" type="text" value="{{ $datakerusakan->tanggalpengecekan }}" class="form-control" placeholder="Enter Date" readonly>
+                    <label class="text-dark">Tanggal Pengecekan</label>
+                    <input name="tgl_pengecekan" type="date"
+                        class="form-control"
+                        value="{{ $datakerusakan->tgl_pengecekan }}">
+                    @error('tgl_pengecekan')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
+
+                <!-- Deskripsi -->
                 <div class="form-group">
-                    <label>Deskripsi</label>
-                    <input name="deskripsi" type="text" value="{{ $datakerusakan->deskripsi }}" class="form-control" placeholder="Enter Description" readonly>
+                    <label class="text-dark">Deskripsi</label>
+                    <input name="deskripsi" type="text"
+                        class="form-control"
+                        placeholder="Masukan Deskripsi"
+                        value="{{$datakerusakan->deskripsi }}">
+                    @error('deskripsi')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
+
+                <!-- Status -->
                 <div class="form-group">
                     <label>Status</label>
-                    <select name="status" class="form-control" required>
-                        <option value="rusak" {{ $datakerusakan->status == 'rusak' ? 'selected' : '' }}>Rusak</option>
-                        <option value="tidak rusak" {{ $datakerusakan->status == 'tidak rusak' ? 'selected' : '' }}>Tidak Rusak</option>
+                    <select name="setatus" class="form-control">
+                        <option value="rusak" {{  $datakerusakan->status == 'rusak' ? 'selected' : '' }}>Rusak</option>
+                        <option value="tidak rusak" {{  $datakerusakan->status == 'tidak rusak' ? 'selected' : '' }}>Tidak Rusak</option>
                     </select>
+                    @error('status')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" disabled>
-                    <label class="form-check-label">
-                        Can't check this
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary mt-3">Update</button>
             </form>
         </div>
     </div>
 </div>
+@endsection

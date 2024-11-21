@@ -26,4 +26,8 @@ class Peminjam extends Model
     {
         return $this->belongsTo(Barang::class, 'barang_id');
     }
+    public function kerusakan()
+    {
+        return $this->hasMany(Barang::class);
+    }
 }

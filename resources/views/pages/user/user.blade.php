@@ -28,14 +28,13 @@
                         <td>{{$user->role }}</td>
 
                         <td>
-                            <a href="/editUser/{{ $user->id}}"
-                                class="btn btn-warning  btn-dangar">edit</a>
+                            <a href="/editUser/{{ $user->id}}" class="btn btn-warning ">edit</a>
 
-                                <a href="/destroy/user/{{ $user->id }}" 
+                                <a href="/destroy/user/{{ $user->id }}"
                                     class="btn btn-danger btn-warning"
                                     onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">Hapus</a>
-                                 
-    
+
+
                         <tr>
                     </tr>
                     @endforeach

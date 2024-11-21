@@ -24,16 +24,11 @@
                 <div class="form-group">
                     <label class="text-dark">Role</label>
                     <select name="role" class="form-control">
-                        <option value="1" {{ old('role') == '1' ? 'selected' : '' }}>1</option>
-                        <option value="2" {{ old('role') == '2' ? 'selected' : '' }}>2</option>
+                        <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>user</option>
+                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>admin</option>
                     </select> <!-- Corrected usage of old() for select -->
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" disabled>
-                    <label class="form-check-label">
-                        Jadi Deh Gi <!-- Optional: clarify what this means in context -->
-                    </label>
-                </div>
+                
                 <button type="submit" class="btn btn-primary mt-3">Submit</button>
             </form>
         </div>

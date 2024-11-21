@@ -10,20 +10,24 @@ use Illuminate\Http\Request;
 class KerusakanController extends Controller
 {
     public function index()
-    {
-        $kerusakans = Kerusakan::with(['user', 'barang'])->get();
-        return view('pages.kerusakan.datakerusakan', compact('kerusakans'));
-    }
+{
+    // Memuat relasi dengan user dan barang
+    $kerusakans = Kerusakan::with(['peminjam', 'barang'])->get();
+
+    return view('pages.kerusakan.datakerusakan', compact('kerusakans'));
+}
+
 
     public function create()
     {
-        $users = User::all();
+        $users = User::where('role', 'user')->get(); // Hanya pengguna dengan role admin
         $barangs = Barang::all();
+
         return view('pages.kerusakan.tambahkerusakan', compact('users', 'barangs'));
     }
 
     public function store(Request $request)
-{
+    {
     // Validasi input
     $request->validate([
         'user_id'          => 'required|integer', // ID pengguna yang terkait
@@ -56,44 +60,55 @@ class KerusakanController extends Controller
 
 
 
-    public function edit($id) {
-        $datakerusakan = Kerusakan::findOrFail($id); // Corrected 'findOrfile' to 'findOrFail'
-        return view('pengaduan', compact('datakerusakan')); // Corrected view path
-    }
+public function edit($id)
+{
+    // Fetch the specific kerusakan record with related user and barang data
+    $datakerusakan = Kerusakan::with('user', 'barang')->findOrFail($id);
 
-    public function update(Request $request, $id) {
-        $request->validate([
-            'Nama' => 'required',
-            'Barang' => 'required',
-            'Tanggal pengecekan' => 'required',
-            'Deskripsi' => 'required',
-            'status' => 'required',
-        ], [
-            'Nama.required' => 'Nama harus diisi',
-            'Barang.required' => 'Barang harus diisi',
-            'Tanggal pengecekan.required' => 'Tanggal pengecekan harus diisi',
-            'Deskripsi.required' => 'Deskripsi harus diisi',
-            'status.required' => 'Status harus diisi',
-        ]);
+    $barangs =Barang::all();
+    // Fetch users with the role 'user' for the dropdown
+    $users = User::where('role', 'user')->get();
 
-        // Assuming Kerusakan is an Eloquent model
-        $datakerusakan = Kerusakan::findOrFail($id); // Corrected 'findOrfile' to 'findOrFail'
-        $datakerusakan->Nama = $request->Nama;
-        $datakerusakan->Barang = $request->Barang;
-        $datakerusakan->Tanggal_pengecekan = $request->input('Tanggal pengecekan');
-        $datakerusakan->Deskripsi = $request->Deskripsi;
-        $datakerusakan->status = $request->status;
-        $datakerusakan->save();
+    return view('pages.kerusakan.editkerusakan', compact('datakerusakan', 'barangs', 'users'));
+}
 
-        return redirect()->route('pengaduan.index')->with('success', 'Data berhasil diupdate');
-    }
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'user_id'           => 'required|exists:users,id',  // Ensure user exists
+        'barang_id'         => 'required' ,
+        'tgl_pengecekan'    => 'required|date',             // Ensure valid date
+        'deskripsi'         => 'required|string|max:255',   // Limit description length
+        'setatus'            => 'required', // Validate allowed statuses
+    ], [
+        // Custom error messages
+        'user_id.required'        => 'Nama peminjam harus dipilih.',
+        'barang_id.required'      => 'Barang harus dipilih.',
+        'tgl_pengecekan.required' => 'Tanggal pengecekan harus diisi.',
+        'deskripsi.required'      => 'Deskripsi harus diisi.',
+        'status.required'         => 'Status harus diisi.',
+    ]);
+
+    // Update data kerusakan
+    $datakerusakan = Kerusakan::findOrFail($id);
+    $datakerusakan->user_id = $request->user_id;
+    $datakerusakan->barang_id = $request->barang_id;
+    $datakerusakan->tgl_pengecekan = $request->tgl_pengecekan;
+    $datakerusakan->deskripsi = $request->deskripsi;
+    $datakerusakan->setatus = $request->setatus;
+    $datakerusakan->save();
+
+    return redirect('/datakerusakan')->with('success', 'Data kerusakan berhasil diperbarui.');
+}
+
+
 
 
 
         public function destroy($id)
         {
-            $kerusakans = kerusakan::find($id);
-            $kerusakans->delete();
+            $item = kerusakan::findOrFail($id);
+            $item->delete();
             return redirect('/datakerusakan')->with('success','kerusakan berhasil dihapus.');
         }
 

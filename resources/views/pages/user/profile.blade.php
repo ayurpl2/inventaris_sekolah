@@ -40,11 +40,13 @@
 
 <div class="col-lg-20 d-flex align-items-stretch">
     <div class="p-2 mt-4 me-4">
-        <div class="card-body 8">
+        <div class="card-body">
             <h4 class="card-title fw-semibold mb-4">profile</h4>
             <div class="table-respon">
 
-            <div class="card">
+            <div class="card ">
+
+                <p><img class="rounded-circle border border-white" src="{{ asset('assets/images/profile/profile.png') }}" width="80" height="80" alt=""></p>
                 <ul>
                 <li><strong>nama:</strong>{{Auth::user()->nama}}</li>
                 <li><strong>email:</strong>{{Auth::user()->email}}</li>
@@ -55,30 +57,7 @@
     </div>
 </div>
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th class="text-dark">no</th>
-            <th class="text-dark">nama</th>
-            <th class="text-dark">email</th>
-            <th class="text-dark">aksi</th>
-        </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $no => $user)
-            <tr>
-                        <td class="text-dark">{{$no +1 }}</td>
-                        <td class="text-dark">{{$user->nama}}</td>
-                        <td class="text-dark">{{$user->email}}</td>
-                        <td class="text-dark">{{$user->role}}</td>
-                        <td>
-                            <a href="/edituser"class="btn btn-info">edit</a>
-                            <a href=""class="btn btn-danger">delete</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+
 </div>
 
 

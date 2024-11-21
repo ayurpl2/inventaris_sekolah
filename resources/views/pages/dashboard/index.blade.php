@@ -11,8 +11,8 @@
                         <div class="card">
                             <div class="stat-widget-two card-body">
                                 <div class="stat-content">
-                                    <div class="stat-text">Today Expenses </div>
-                                    <div class="stat-digit"> <i class="fa fa-usd"></i>8500</div>
+                                    <div class="stat-text">peminjam </div>
+                                    <div class="stat-digit"><a href="/datapeminjam" class="text-dark"> {{ $pinjamanbarang}} Peminjam</a></div>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success w-85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
@@ -24,8 +24,8 @@
                         <div class="card">
                             <div class="stat-widget-two card-body">
                                 <div class="stat-content">
-                                    <div class="stat-text">Income Detail</div>
-                                    <div class="stat-digit"> <i class="fa fa-usd"></i>7800</div>
+                                    <div class="stat-text">daftar barang</div>
+                                    <div class="stat-digit"> <a href="/databarang" class="text-dark">{{ $barang}} barang</a> </div>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary w-75" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
@@ -37,8 +37,8 @@
                         <div class="card">
                             <div class="stat-widget-two card-body">
                                 <div class="stat-content">
-                                    <div class="stat-text">Task Completed</div>
-                                    <div class="stat-digit"> <i class="fa fa-usd"></i> 500</div>
+                                    <div class="stat-text">data kerusakan</div>
+                                    <div class="stat-digit"> <a href="/datakerusakan" class="text-dark">{{ $rusak}} kerusakan</a> </div>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -50,8 +50,8 @@
                         <div class="card">
                             <div class="stat-widget-two card-body">
                                 <div class="stat-content">
-                                    <div class="stat-text">Task Completed</div>
-                                    <div class="stat-digit"> <i class="fa fa-usd"></i>650</div>
+                                    <div class="stat-text">barang yang baik</div>
+                                    <div class="stat-digit"><a href="/datakerusakan" class="text-dark">{{$baik}} barang aman</a> </div>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-danger w-65" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
@@ -79,18 +79,13 @@
                         <div class="card">
                             <div class="card-body text-center">
                                 <div class="m-t-10">
-                                    <h4 class="card-title">Customer Feedback</h4>
-                                    <h2 class="mt-3">385749</h2>
+                                    <h4 class="card-title">Total user</h4>
+                                    <h2 class="mt-3"> <a href="/user" class="text-dark">{{$totaladmin}} User</a> </h2>
                                 </div>
                                 <div class="widget-card-circle mt-5 mb-5" id="info-circle-card">
                                     <i class="ti-control-shuffle pa"></i>
                                 </div>
-                                <ul class="widget-line-list m-b-15">
-                                    <li class="border-right">92% <br><span class="text-success"><i
-                                                class="ti-hand-point-up"></i> Positive</span></li>
-                                    <li>8% <br><span class="text-danger"><i
-                                                class="ti-hand-point-down"></i>Negative</span></li>
-                                </ul>
+
                             </div>
                         </div>
                     </div>

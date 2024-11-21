@@ -24,27 +24,46 @@ class PeminjamanController extends Controller
 
     // Menyimpan data peminjaman baru
     public function store(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'user_id' => 'required|string|max:255',
-            'barang_id' => 'required|string|max:255', // Ubah dari judul_buku ke barang_id
-            'tgl_peminjam' => 'required|date',
-            'tgl_pengembalian' => 'required|date',
-            'jml_pinjaman' => 'required|integer',
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'user_id' => 'required|string|max:255',
+        'barang_id' => 'required|string|max:255', // Ubah dari judul_buku ke barang_id
+        'tgl_peminjam' => 'required|date',
+        'tgl_pengembalian' => 'required|date',
+        'jml_pinjaman' => 'required|integer',
+    ]);
 
-        // Simpan data peminjaman
-        $storeDataPeminjaman=[
-            'user_id' => $request->user_id,
-            'barang_id' => $request->barang_id, // Ubah dari judul_buku ke barang
-            'tgl_peminjam' => $request->tgl_peminjam,
-            'tgl_pengembalian' => $request->tgl_pengembalian,
-            'jml_pinjaman' => $request->jml_pinjaman,
-        ];
-        peminjam::create($storeDataPeminjaman);
-        return redirect('/datapeminjam')->with('berhasil', 'Data peminjaman berhasil ditambahkan');
+    // Simpan data peminjaman
+    $storeDataPeminjaman = [
+        'user_id' => $request->user_id,
+        'barang_id' => $request->barang_id, // Ubah dari judul_buku ke barang_id
+        'tgl_peminjam' => $request->tgl_peminjam,
+        'tgl_pengembalian' => $request->tgl_pengembalian,
+        'jml_pinjaman' => $request->jml_pinjaman,
+    ];
+
+    // Cek stok barang
+    $barang = Barang::find($request->barang_id);
+
+    if ($barang) {
+        if ($barang->stok_barang >= $request->jml_pinjaman) {
+            // Kurangi stok_barang barang
+            $barang->stok_barang -= $request->jml_pinjaman;
+            $barang->save();
+
+            // Simpan peminjaman
+            Peminjam::create($storeDataPeminjaman);
+
+            return redirect('/datapeminjam')->with('berhasil', 'Data peminjaman berhasil ditambahkan dan stok barang diperbarui');
+        } else {
+            return redirect()->back()->with('gagal', 'Stok barang tidak mencukupi');
+        }
+    } else {
+        return redirect()->back()->with('gagal', 'Barang tidak ditemukan');
     }
+}
+
 
     // Mengedit data peminjaman yang sudah ada
     public function edit($id)

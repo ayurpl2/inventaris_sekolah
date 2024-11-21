@@ -16,8 +16,8 @@ class UserController extends Controller
         $users = User::all();
         return view('pages.user.tambahuser', compact('users'));
     }
-    
-    public function storeUser(Request $request) {
+
+    public function store(Request $request) {
         $request->validate([
             'nama' => 'required',
             'email' => 'required|email|unique:users,email', // Added 'email' validation rule
@@ -30,25 +30,25 @@ class UserController extends Controller
             'password.required' => 'Password harus diisi',
             'role.required' => 'Role harus diisi', // Added missing validation message
         ]);
-    
+
         $storeDataUser = [
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => $request->role,
         ];
-    
+
         User::create($storeDataUser);
         return redirect('/user')->with('success', 'User berhasil ditambahkan'); // Optional: added success message
     }
-     
+
 
 
 
     public function editUser($id)
     {
         $dataUser = User::find($id);
-        return view('pages.user.edituser',compact('dataUser')); 
+        return view('pages.user.edituser',compact('dataUser'));
     }
 
     public function updateUser(Request $request, $id)
@@ -80,7 +80,7 @@ class UserController extends Controller
 }
 
 
-    
+
     public function destroy($id)
     {
         $users = User::find($id);
@@ -89,6 +89,6 @@ class UserController extends Controller
     }
 
 
-} 
+}
 
 

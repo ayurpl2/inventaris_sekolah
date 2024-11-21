@@ -4,7 +4,10 @@
 <div class="card">
     <div class="card-header">
         <h4 class="card-title">Data Barang</h4>
+        @if (Auth::user()->role == 'admin')
+
         <a href="/tambahbarang" class="btn btn-info">Tambah Barang</a>
+        @endif
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -31,13 +34,17 @@
                             <td class="text-dark">{{ $barang->stok_barang }}</td>
                             <td class="text-dark">{{ number_format($barang->harga, 0, ',', '.') }}</td>
                             <td>
+                                @if (Auth::user()->role == 'admin')
+
                                 <a href="/editbarang/{{ $barang->id }}" class="btn btn-warning">Edit</a>
-                                <form action="/deletebarang/{{ $barang->id }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">Hapus</button>
-                                </form>
-                                
+                                <a onClick="return confirm('apaka anda yakin ingin menghapus?')"
+                                href="/destroy/barang/{{ $barang->id }}"
+                                class="btn btn-danger text-black">Hapus</a>
+                                @endif
+                                @if (Auth::user()->role == 'user')
+
+                                <a href="/tambahpeminjam" class="btn btn-primary">Pinjam</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
